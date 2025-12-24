@@ -1,0 +1,26 @@
+{
+  "name": "save_the_date",
+  "version": "1.0.0",
+  "description": "Personal project to develop a web application for booking dates, in which a user proposes a meet-up and shares a unique link where guests indicate their availability to choose the best possible date.",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/D-Ort/Save_the_Date.git"
+  },
+  "keywords": [
+    "date"
+  ],
+  "author": "David Ortega",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/D-Ort/Save_the_Date/issues"
+  },
+  "homepage": "https://github.com/D-Ort/Save_the_Date#readme",
+  "dependencies": {
+    "mongodb": "^7.0.0"
+  }
+}
