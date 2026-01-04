@@ -6,7 +6,7 @@ const router = express.Router();
 // Definición de rutas
 router.post("/", userControllers.createUser);
 router.get("/", userControllers.getAllUsers);
-router.get("/:id", userControllers.getUsersById);
+router.get("/:id", userControllers.getUserById);
 router.patch("/:id", userControllers.updateUser);
 router.delete("/:id", userControllers.deleteUser);
 

@@ -5,7 +5,7 @@ const router = express.Router();
 
 // Definición de rutas
 router.post("/", eventControllers.createEvent);
-router.get("/", eventControllers.getAllEvent);
+router.get("/", eventControllers.getAllEvents);
 router.get("/:id", eventControllers.getEventById);
 router.patch("/:id", eventControllers.updateEvent);
 router.delete("/:id", eventControllers.deleteEvent);
