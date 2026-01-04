@@ -49,6 +49,10 @@ export const updateEvent = async (req, res) => {
   try {
     const { name, info, dates } = req.body;
 
+    if (!name && !info && !dates) {
+      return res.status(400).json({ message: "Nada que actualizar" });
+    }
+
     const updateData = {};
     if(name) updateData.name = name;
     if(info) updateData.info = info;
@@ -76,5 +80,70 @@ export const deleteEvent = async (req, res) => {
   } catch (error){
     console.error(error);
     res.status(500).json({ message: "Ha ocurrido un error" });
+  }
+};
+
+// Añadir voto
+export const addVote = async (req, res) => {
+  try {
+    const result = await eventModels.addVote(req.params.id, req.body);
+    if (!result) {
+      return res.status(404).json({ error: "Evento no encontrado" });
+    }
+    res.status(201).json(result);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+};
+
+//Actualizar voto
+export const updateVote = async (req, res) => {
+  try {
+    const { token, availability } = req.body;
+
+    const ok = await eventModels.updateVote(
+      req.params.id,
+      req.params.voteId,
+      token,
+      availability
+    );
+
+    if (!ok) {
+      return res.status(404).json({ error: "Voto no encontrado" });
+    }
+
+    res.json({ success: true });
+
+  } catch (err) {
+    if (err.message === "No autorizado") {
+      return res.status(403).json({ error: err.message });
+    }
+    res.status(400).json({ error: err.message });
+  }
+};
+
+//Eliminar voto
+export const deleteVote = async (req, res) => {
+  try {
+    const { token, isAdmin } = req.body;
+
+    const ok = await eventModels.deleteVote(
+      req.params.id,
+      req.params.voteId,
+      token,
+      isAdmin
+    );
+
+    if (!ok) {
+      return res.status(404).json({ error: "Voto no encontrado" });
+    }
+
+    res.json({ success: true });
+
+  } catch (err) {
+    if (err.message === "No autorizado") {
+      return res.status(403).json({ error: err.message });
+    }
+    res.status(400).json({ error: err.message });
   }
 };
